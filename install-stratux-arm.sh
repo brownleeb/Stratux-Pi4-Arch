@@ -40,8 +40,7 @@ mkdir -p /etc/network && cp -f interfaces /etc/network/interfaces
 cp -f sshd_config /etc/ssh/sshd_config
 
 sed -i "/server.document-root/d" /etc/lighttpd/lighttpd.conf
-echo "server.document-root = /opt/stratux/www" >> /etc/lighttpd/lighttpd.conf
-echo 'server.stat-cache-engine = "disable"' >> /etc/lighttpd/lighttpd.conf
+echo -e 'server.stat-cache-engine = "disable"\nserver.document-root = /opt/stratux/www' >> /etc/lighttpd/lighttpd.conf
 echo 'stratux' > /etc/hostname
 echo -e "[Match]\nName=wlan0\n\n[Network]\nAddress=192.168.10.1/24\nDNSSEC=no" > /etc/systemd/network/wlan0.network
 
@@ -61,7 +60,7 @@ systemctl enable stratux
 
 source /root/.bashrc
 cd /root/stratux
-sed -i "s/ARCH=$(shell arch)/ARCH=$(uname -m)/" Makefile
+sed -i "s/ARCH=$(shell arch)/ARCH=$(shell uname -m)/" Makefile
 make
 make install
 
