@@ -1,9 +1,10 @@
-# First, install clean copy of Arch Linux ARM v7 (ARMv7l)
+# First, install clean copy of Arch Linux ARM v7 (ARMv7l), run an update and install needed packages.
 pacman-key --init
 pacman-key --populate archlinuxarm
 sed -i 's/$/ audit=0 ipv6.disable=1/' /boot/cmdline.txt
 pacman -Syu
 pacman -S base-devel vim iw lshw wget gpsd tcpdump libusb cmake go mercurial autoconf fftw libtool automake pkg-config libjpeg python-pip python-pillow python-daemon screen sdl2 git rtl-sdr ncurses bladerf dnsmasq nginx go jq ifplugd usbutils lighttpd
+# create a temporary stratux.conf file in /boot
 echo -ne '{"DarkMode":false,"UAT_Enabled":true,"ES_Enabled":true,"OGN_Enabled":false,"APRS_Enabled":false,"AIS_Enabled":false,"Ping_Enabled":false,"GPS_Enabled":true,"BMP_Sensor_Enabled":false,"IMU_Sensor_Enabled":false,"NetworkOutputs":[{"Conn":null,"Ip":"","Port":4000,"Capability":5,"LastPingResponse":"0001-01-01T00:00:00Z","LastUnreachable":"0001-01-01T00:00:00Z","SleepFlag":false},{"Conn":null,"Ip":"","Port":2000,"Capability":8,"LastPingResponse":"0001-01-01T00:00:00Z","LastUnreachable":"0001-01-01T00:00:00Z","SleepFlag":false},{"Conn":null,"Ip":"","Port":49002,"Capability":18,"LastPingResponse":"0001-01-01T00:00:00Z","LastUnreachable":"0001-01-01T00:00:00Z","SleepFlag":false}],"SerialOutputs":null,"DisplayTrafficSource":false,"DEBUG":false,"ReplayLog":false,"AHRSLog":false,"PersistentLogging":false,"IMUMapping":[-1,0],"SensorQuaternion":[0,0,0,0],"C":[0,0,0],"D":[0,0,0],"PPM":0,"AltitudeOffset":0,"OwnshipModeS":"F00000","WatchList":"","DeveloperMode":true,"GLimits":"","StaticIps":[],"WiFiCountry":"US","WiFiSSID":"stratux","WiFiChannel":1,"WiFiSecurityEnabled":false,"WiFiPassphrase":"","NoSleep":false,"WiFiMode":0,"WiFiDirectPin":"","WiFiIPAddress":"192.168.10.1","WiFiClientNetworks":[{"SSID":"","Password":""}],"WiFiInternetPassThroughEnabled":false,"EstimateBearinglessDist":false,"RadarLimits":10000,"RadarRange":10,"OGNI2CTXEnabled":false,"OGNAddr":"","OGNAddrType":0,"OGNAcftType":0,"OGNPilot":"","OGNReg":"","OGNTxPower":0,"PWMDutyMin":0}' > /boot/stratux.conf
 useradd -d /home/pi -U -m pi
 mkdir /opt/stratux
